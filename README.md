@@ -1,7 +1,7 @@
 How to use a parser
 
 1.Navigate to the project directory:
-cd job_scraper
+cd job_scraper_new
 
 2.Install dependencies
 bundle install
