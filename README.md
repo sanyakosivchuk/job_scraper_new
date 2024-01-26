@@ -16,4 +16,4 @@ DB_USER=your_database_user
 DB_PASSWORD=your_database_password
 
 4.Run scraper
-ruby scraper.rb
+ruby app/main.rb
