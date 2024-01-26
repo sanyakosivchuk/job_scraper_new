@@ -1,36 +1,24 @@
 require 'nokogiri'
 require 'httparty'
-require 'active_record'
 require 'dotenv/load'
-require_relative 'job.rb'
+require_relative 'job_database_manager'
 
 class Scraper
   include HTTParty
+
+  BASE_URL = ENV['BASE_URL']
 
   def self.call
     new.call
   end
 
-  BASE_URL = ENV['BASE_URL']
-  DB_HOST = ENV['DB_HOST']
-  DB_NAME = ENV['DB_NAME']
-  DB_USER = ENV['DB_USER']
-  DB_PASSWORD = ENV['DB_PASSWORD']
-
   def initialize
-    ActiveRecord::Base.establish_connection(
-      adapter: 'postgresql',
-      host: DB_HOST,
-      database: DB_NAME,
-      username: DB_USER,
-      password: DB_PASSWORD
-    )
     @jobs = []
   end
 
   def call
     scrape_jobs
-    save_to_database
+    DatabaseManager.save_jobs(@jobs)
   end
 
   private
@@ -70,23 +58,4 @@ class Scraper
       }
     end
   end
-
-  def save_to_database
-    @jobs.each do |job|
-      existing_job = Job.find_by(url: job[:url])
-      next if existing_job
-
-      Job.create(
-        title: job[:title],
-        description: job[:description],
-        url: job[:url],
-        location: job[:location],
-        about_team: job[:about_team]
-      )
-
-      puts "Job: #{job[:title]} saved to the database."
-    end
-  end
 end
-
-Scraper.call
