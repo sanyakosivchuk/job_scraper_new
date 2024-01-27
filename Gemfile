@@ -7,7 +7,5 @@ gem 'nokogiri'
 gem 'activerecord'
 gem 'dotenv'
 gem 'pg'
-
-group :development, :test do
-  gem 'rspec'
-end
+gem 'rspec'
+gem 'webmock'

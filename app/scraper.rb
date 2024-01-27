@@ -33,6 +33,7 @@ class Scraper
     doc = Nokogiri::HTML(html.body)
 
     doc.css('li.pt-16').each do |job_li|
+      #job_li=doc.css('li.pt-16').first
       title = job_li.css('h3.f-subhead-2').text.strip
       location = job_li.css('span.f-body-1').text.strip
       url = job_li.css('a.ui-link').attr('href')&.value
