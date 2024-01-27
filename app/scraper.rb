@@ -1,44 +1,18 @@
 require 'nokogiri'
 require 'httparty'
-require 'active_record'
-require 'dotenv/load'
-require_relative 'job.rb'
+require_relative 'database_manager'
 
 class Scraper
   include HTTParty
+
+  BASE_URL = ENV['BASE_URL']
 
   def self.call
     new.call
   end
 
-  BASE_URL = ENV['BASE_URL']
-  DB_HOST = ENV['DB_HOST']
-  DB_NAME = ENV['DB_NAME']
-  DB_USER = ENV['DB_USER']
-  DB_PASSWORD = ENV['DB_PASSWORD']
-  
   def initialize
-    ActiveRecord::Base.establish_connection(
-      adapter: 'postgresql',
-      host: DB_HOST,
-      database: DB_NAME,
-      username: DB_USER,
-      password: DB_PASSWORD
-    )
     @jobs = []
-
-    unless ActiveRecord::Base.connection.table_exists?(:jobs)
-      ActiveRecord::Base.connection.create_table :jobs do |t|
-        t.string :title
-        t.text :description
-        t.string :url
-        t.string :location
-        t.text :about_team
-        t.string :apply_now_url
-
-        t.timestamps
-      end
-    end
   end
 
   def call
@@ -57,7 +31,7 @@ class Scraper
     end
 
     doc = Nokogiri::HTML(html.body)
-  
+
     doc.css('li.pt-16').each do |job_li|
       title = job_li.css('h3.f-subhead-2').text.strip
       location = job_li.css('span.f-body-1').text.strip
@@ -105,5 +79,3 @@ class Scraper
     end
   end
 end
-
-Scraper.call
