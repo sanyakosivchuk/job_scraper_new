@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby "3.0.2"
 
-gem 'fast_http'
+gem 'httparty'
 gem 'nokogiri'
 gem 'activerecord'
 gem 'dotenv'
