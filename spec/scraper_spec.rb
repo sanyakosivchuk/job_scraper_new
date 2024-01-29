@@ -19,7 +19,6 @@ RSpec.describe Scraper do
     Scraper.call
     expect(Job.first).to have_attributes(
       title: 'Account Associate',
-      url: saved_link,
       location: 'San Francisco, California, United States — Go To Market',
       apply_now_url: 'https://boards.greenhouse.io/openai/jobs/5059976004#app'
     )

@@ -53,8 +53,6 @@ class Scraper
 
       @jobs << {
         title: title,
-        description: description,
-        url: description_url,
         location: location,
         about_team: about_team,
         apply_now_url: apply_now_link
@@ -64,13 +62,11 @@ class Scraper
 
   def save_to_database
     @jobs.each do |job|
-      existing_job = Job.find_by(url: job[:url])
+      existing_job = Job.find_by(apply_now_url: job[:apply_now_url])
       next if existing_job
 
       Job.create(
         title: job[:title],
-        description: job[:description],
-        url: job[:url],
         location: job[:location],
         about_team: job[:about_team],
         apply_now_url: job[:apply_now_url]
