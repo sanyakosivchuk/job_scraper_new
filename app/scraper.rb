@@ -46,31 +46,31 @@ class Scraper
       description_doc = Nokogiri::HTML(description_html.body)
       description_doc.css('.section').text.strip
 
-      about_team = ''
+      description = ''
       ui_description = description_doc.at('.ui-description')
-      about_team = ui_description.inner_html if ui_description
+      description = ui_description.inner_html if ui_description
 
       apply_now_link = job_li.css('a[href*="greenhouse"]').first['href'] if job_li.css('a[href*="greenhouse"]').first
 
       @jobs << {
         title:,
         location:,
-        about_team:,
-        apply_now_url: apply_now_link
+        description:,
+        url: apply_now_link
       }
     end
   end
 
   def save_to_database
     @jobs.each do |job|
-      existing_job = Job.find_by(apply_now_url: job[:apply_now_url])
+      existing_job = Job.find_by(url: job[:url])
       next if existing_job
 
       Job.create(
         title: job[:title],
         location: job[:location],
-        about_team: job[:about_team],
-        apply_now_url: job[:apply_now_url]
+        description: job[:description],
+        url: job[:url]
       )
 
       puts "Job: #{job[:title]} saved to the database."

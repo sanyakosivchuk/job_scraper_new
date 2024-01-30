@@ -21,8 +21,8 @@ unless ActiveRecord::Base.connection.table_exists?(:jobs)
   ActiveRecord::Base.connection.create_table :jobs do |t|
     t.string :title
     t.string :location
-    t.text :about_team
-    t.string :apply_now_url
+    t.text :description
+    t.string :url
 
     t.timestamps
   end
