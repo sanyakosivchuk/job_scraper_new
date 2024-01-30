@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'active_record'
 require 'dotenv/load'
-require_relative 'job.rb'
+require_relative 'job'
 
 DB_HOST = ENV['DB_HOST']
 DB_NAME = ENV['DB_NAME']

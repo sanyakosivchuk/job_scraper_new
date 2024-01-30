@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec'
 require 'webmock/rspec'
 require_relative '../app/scraper'
@@ -10,7 +12,7 @@ RSpec.describe Scraper do
   let(:invalid_html) { File.open('./spec/fixtures/invalid.html').read }
 
   before do
-    stub_request(:get, base_url + '/').to_return(status: 200, body: job_list_html)
+    stub_request(:get, "#{base_url}/").to_return(status: 200, body: job_list_html)
     stub_request(:get, saved_link).to_return(status: 200, body: job_html)
   end
 

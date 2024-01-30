@@ -1,3 +1,5 @@
-require_relative '../app/scraper.rb'
+# frozen_string_literal: true
+
+require_relative '../app/scraper'
 
 Scraper.call
