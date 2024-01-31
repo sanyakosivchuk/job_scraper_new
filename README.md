@@ -1,4 +1,14 @@
-# How to use a parser through script
+# Job Scraper
+Job Scraper is a Ruby script designed to extract job listings from websites and store them in a database. It provides a flexible and customizable
+solution for automating the process of gathering job opportunities from various sources.
+
+Features
+- Scalable: The script is capable of scraping job listings from different websites, allowing users to target specific platforms or sources.
+- Modular Design: The codebase is organized into separate classes for scraping and database operations, promoting modularity and ease of maintenance.
+- Customizable: Users can easily modify the script to adapt it to their specific requirements, such as adding support for additional job boards or - refining data extraction logic.
+- Database Integration: Job listings are saved to a database, enabling users to store and manage scraped data efficiently.
+
+## How to use a parser through script
 
 ### 1.Navigate to the project directory:
 ```
@@ -26,14 +36,14 @@ DB_PASSWORD=your_database_password
 ruby app/main.rb
 ```
 
-# How to use rspec tests
+## How to use rspec tests
 ### 1.Install dependencies
 ```
 bundle install
 ```
 
 ### 2.Edit spec/scraper_spec.rb data to the one you would like to test 
-example with testing the Account Associate:
+Example with testing the Account Associate:
 ```
 let(:saved_link) { 'https://openai.com/careers/account-associate' }
 
@@ -43,14 +53,14 @@ expect(Job.first).to have_attributes(
       apply_now_url: 'https://boards.greenhouse.io/openai/jobs/5059976004#app'
     )
 ```
-change these strings to whatever you want to test
+Change these strings to whatever you want to test
 
 ### 3.Run rspec 
 ```
 rspec spec/scraper_spec.rb
 ```
 
-# How to use scraper gem
+## How to use scraper gem
 ### 1.Make sure to have .env file to connect to your database in your folder 
 Make it as on example:
 ```
@@ -62,9 +72,9 @@ DB_USER=your_database_user
 DB_PASSWORD=your_database_password
 ```
 ### 2.Make sure to have scraper gem file cloned locally
-it should look like this:
+It should look like this:
 ```
-scraper-0.1.3.gem
+scraper-0.1.5.gem
 ```
 ### 3.Run gem install command
 ```

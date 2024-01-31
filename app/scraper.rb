@@ -2,7 +2,7 @@
 
 require 'nokogiri'
 require 'httparty'
-require_relative 'database_manager'
+require_relative 'job_creator'
 
 class Scraper
   include HTTParty
@@ -44,9 +44,7 @@ class Scraper
       description_url = URI.join(BASE_URL, url).to_s
       description_html = self.class.get(description_url)
       description_doc = Nokogiri::HTML(description_html.body)
-      description_doc.css('.section').text.strip
-
-      description = ''
+      description = description_doc.css('.section').text.strip
       ui_description = description_doc.at('.ui-description')
       description = ui_description.inner_html if ui_description
 
@@ -63,17 +61,7 @@ class Scraper
 
   def save_to_database
     @jobs.each do |job|
-      existing_job = Job.find_by(url: job[:url])
-      next if existing_job
-
-      Job.create(
-        title: job[:title],
-        location: job[:location],
-        description: job[:description],
-        url: job[:url]
-      )
-
-      puts "Job: #{job[:title]} saved to the database."
+      JobCreator.new(job).create_job
     end
   end
 end
