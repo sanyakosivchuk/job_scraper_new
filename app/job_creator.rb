@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'database_manager'
 
 class JobCreator
@@ -8,8 +6,7 @@ class JobCreator
   end
 
   def create_job
-    existing_job = Job.find_by(url: @job_data[:url])
-    return if existing_job
+    return if find_job
 
     Job.create(
       title: @job_data[:title],
@@ -19,5 +16,11 @@ class JobCreator
     )
 
     puts "Job: #{@job_data[:title]} saved to the database."
+  end
+
+  private
+
+  def find_job
+    existing_job = Job.find_by(url: @job_data[:url])
   end
 end
