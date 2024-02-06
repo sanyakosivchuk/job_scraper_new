@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../app/job_creator'
 require_relative '../app/job'
 require_relative '../app/database_manager'
