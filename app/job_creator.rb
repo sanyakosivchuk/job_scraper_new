@@ -6,16 +6,20 @@ class JobCreator
   end
 
   def create_job
-    return if find_job
+    begin
+      return if find_job
 
-    Job.create(
-      title: @job_data[:title],
-      location: @job_data[:location],
-      description: @job_data[:description],
-      url: @job_data[:url]
-    )
+      Job.create(
+        title: @job_data[:title],
+        location: @job_data[:location],
+        description: @job_data[:description],
+        url: @job_data[:url]
+      )
 
-    puts "Job: #{@job_data[:title]} saved to the database."
+      puts "Job: #{@job_data[:title]} saved to the database."
+    rescue => e
+      puts "An error occurred while creating the job: #{e.message}"
+    end
   end
 
   private
