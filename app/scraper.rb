@@ -27,7 +27,7 @@ class Scraper
   def scrape_jobs
     html = self.class.get("#{BASE_URL}/")
 
-    if html.body.nil? || html.body.empty?
+    if html.body.to_s.empty?
       puts 'Error: Empty response body'
       return
     end
@@ -61,7 +61,7 @@ class Scraper
 
   def save_to_database
     @jobs.each do |job|
-      JobCreator.new(job).create_job
+      JobCreator.new(job).save_job
     end
   end
 end
