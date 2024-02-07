@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'scraper'
-  spec.version       = '0.1.5'
+  spec.version       = '0.1.6'
   spec.authors       = ['sanyakosivchuk']
   spec.email         = ['kosivcuks@gmail.com']
   spec.summary       = 'A job scraper is a gem for parsing jobs from openAi'
