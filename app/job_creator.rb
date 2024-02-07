@@ -7,7 +7,7 @@ class JobCreator
     @job_data = job_data
   end
 
-  def create_job
+  def save_job
     return if find_job
 
     Job.create(

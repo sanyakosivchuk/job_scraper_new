@@ -15,7 +15,7 @@ describe JobCreator do
     }
   end
 
-  describe '#create_job' do
+  describe '#save_job' do
     after do
       Job.last&.destroy
     end
@@ -24,14 +24,14 @@ describe JobCreator do
       # Make sure that there are no jobs in the database
       expect(Job.count).to eq(0)
 
-      JobCreator.new(job_data).create_job
+      JobCreator.new(job_data).save_job
       expect(Job.count).to eq(1)
 
-      created_job = Job.last
-      expect(created_job.title).to eq(job_data[:title])
-      expect(created_job.location).to eq(job_data[:location])
-      expect(created_job.description).to eq(job_data[:description])
-      expect(created_job.url).to eq(job_data[:url])
+      saved_job = Job.last
+      expect(saved_job.title).to eq(job_data[:title])
+      expect(saved_job.location).to eq(job_data[:location])
+      expect(saved_job.description).to eq(job_data[:description])
+      expect(saved_job.url).to eq(job_data[:url])
     end
   end
 end
