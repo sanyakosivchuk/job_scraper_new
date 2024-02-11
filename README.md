@@ -33,7 +33,7 @@ DB_PASSWORD=your_database_password
 
 ### 4.Run scraper
 ```
-ruby app/main.rb
+ruby bin/main.rb
 ```
 
 ## How to use rspec tests
@@ -72,7 +72,7 @@ DB_USER=your_database_user
 DB_PASSWORD=your_database_password
 ```
 ### 2.Make sure to have scraper gem file cloned locally
-It should look like this:
+It should look something like this:
 ```
 scraper-0.1.5.gem
 ```
